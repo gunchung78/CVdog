@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import copy
 
 import sys
+from os import system, name 
 
 sys.path.append('../../')
 
@@ -52,6 +53,14 @@ parser.add_argument("-dr",
                     action='store_true')
 ARGS = parser.parse_args()
 
+def consoleClear():
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear') 
 
 def main():
     """ The main() function. """
@@ -176,9 +185,9 @@ def main():
 
         FL_Elbow.append(np.degrees(joint_angles[0][-1]))
 
-        # for i, (key, Tbf_in) in enumerate(T_bf.items()):
-        #     print("{}: \t Angle: {}".format(key, np.degrees(joint_angles[i])))
-        # print("-------------------------")
+        for i, (key, Tbf_in) in enumerate(T_bf.items()):
+            print("{}: \t Angle: {}".format(key, np.degrees(joint_angles[i])))
+        print("-------------------------")
 
         env.pass_joint_angles(joint_angles.reshape(-1))
         # Get External Observations
@@ -213,9 +222,11 @@ def main():
         # time.sleep(1.0)
 
         t += 1
+        consoleClear()
     env.close()
-    print(joint_angles)
+    # print(joint_angles)
 
 
 if __name__ == '__main__':
     main()
+    

@@ -34,52 +34,66 @@ INIT_LEG_POS = -0.658319
 # math.pi / 3
 INIT_FOOT_POS = 1.0472
 
-OLD_LEG_POSITION = ["front_left", "front_right", "rear_left", "rear_right"]
-OLD_MOTOR_NAMES = [
-    "motor_front_left_shoulder", "motor_front_left_leg",
-    "foot_motor_front_left", "motor_front_right_shoulder",
-    "motor_front_right_leg", "foot_motor_front_right",
-    "motor_rear_left_shoulder", "motor_rear_left_leg", "foot_motor_rear_left",
-    "motor_rear_right_shoulder", "motor_rear_right_leg",
-    "foot_motor_rear_right"
-]
+print("Select URDF(0 = spot_old.urdf, 1 = spot_cv.urdf, 2 = spot.urdf): ")
+select_urdf = input()
 
-OLD_MOTOR_LIMITS_BY_NAME = {}
-for name in OLD_MOTOR_NAMES:
-    if "shoulder" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
-    elif "leg" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-2.59, 1.571]
-    elif "foot" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.9]
+if select_urdf == "0":
+    robot_urdf = "/assets/urdf/spot_old.urdf"
+    OLD_LEG_POSITION = ["front_left", "front_right", "rear_left", "rear_right"]
+    OLD_MOTOR_NAMES = [
+        "motor_front_left_shoulder", "motor_front_left_leg",
+        "foot_motor_front_left", "motor_front_right_shoulder",
+        "motor_front_right_leg", "foot_motor_front_right",
+        "motor_rear_left_shoulder", "motor_rear_left_leg", "foot_motor_rear_left",
+        "motor_rear_right_shoulder", "motor_rear_right_leg",
+        "foot_motor_rear_right"
+    ]
+    
+    OLD_MOTOR_LIMITS_BY_NAME = {}
+    for name in OLD_MOTOR_NAMES:
+        if "shoulder" in name:
+            OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
+        elif "leg" in name:
+            OLD_MOTOR_LIMITS_BY_NAME[name] = [-2.59, 1.571]
+        elif "foot" in name:
+            OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.9]
 
-OLD_FOOT_NAMES = [
-    "front_left_toe", "front_right_toe", "rear_left_toe", "rear_right_toe"
-]
+    OLD_FOOT_NAMES = [
+        "front_left_toe", "front_right_toe", "rear_left_toe", "rear_right_toe"
+    ]
+    LEG_POSITION = OLD_LEG_POSITION
+    MOTOR_NAMES = OLD_MOTOR_NAMES
+    MOTOR_LIMITS_BY_NAME = OLD_MOTOR_LIMITS_BY_NAME
+    FOOT_NAMES = OLD_FOOT_NAMES
 
-LEG_POSITION = ["front_left", "front_right", "back_left", "back_right"]
-MOTOR_NAMES = [
-    "motor_front_left_hip", "motor_front_left_upper_leg",
-    "motor_front_left_lower_leg", "motor_front_right_hip",
-    "motor_front_right_upper_leg", "motor_front_right_lower_leg",
-    "motor_back_left_hip", "motor_back_left_upper_leg",
-    "motor_back_left_lower_leg", "motor_back_right_hip",
-    "motor_back_right_upper_leg", "motor_back_right_lower_leg"
-]
+else:
+    if select_urdf == "1":
+        robot_urdf = "/assets/urdf/spot_cv.urdf"
+    elif select_urdf == "2":
+        robot_urdf = "/assets/urdf/spot.urdf"
+    LEG_POSITION = ["front_left", "front_right", "back_left", "back_right"]
+    MOTOR_NAMES = [
+        "motor_front_left_hip", "motor_front_left_upper_leg",
+        "motor_front_left_lower_leg", "motor_front_right_hip",
+        "motor_front_right_upper_leg", "motor_front_right_lower_leg",
+        "motor_back_left_hip", "motor_back_left_upper_leg",
+        "motor_back_left_lower_leg", "motor_back_right_hip",
+        "motor_back_right_upper_leg", "motor_back_right_lower_leg"
+    ]
 
-MOTOR_LIMITS_BY_NAME = {}
-for name in MOTOR_NAMES:
-    if "hip" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
-    elif "upper_leg" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.59]
-    elif "lower_leg" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-2.9, 1.671]
+    MOTOR_LIMITS_BY_NAME = {}
+    for name in MOTOR_NAMES:
+        if "hip" in name:
+            MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
+        elif "upper_leg" in name:
+            MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.59]
+        elif "lower_leg" in name:
+            MOTOR_LIMITS_BY_NAME[name] = [-2.9, 1.671]
 
-FOOT_NAMES = [
-    "front_left_leg_foot", "front_right_leg_foot", "back_left_leg_foot",
-    "back_right_leg_foot"
-]
+    FOOT_NAMES = [
+        "front_left_leg_foot", "front_right_leg_foot", "back_left_leg_foot",
+        "back_right_leg_foot"
+    ]
 
 _CHASSIS_NAME_PATTERN = re.compile(r"chassis\D*")
 _MOTOR_NAME_PATTERN = re.compile(r"motor\D*")
@@ -373,13 +387,13 @@ class Spot(object):
         if reload_urdf:
             if self._self_collision_enabled:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + robot_urdf,
                     init_position,
                     useFixedBase=self._on_rack,
                     flags=self._pybullet_client.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
             else:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + robot_urdf,
                     init_position,
                     INIT_ORIENTATION,
                     useFixedBase=self._on_rack)
@@ -477,23 +491,34 @@ class Spot(object):
         front_left, back_left, front_right and back_right.
       add_constraint: Whether to add a constraint at the joints of two feet.
     """
+        if select_urdf == "0":
+            _hip = "_shoulder"
+            _upper_leg = "_leg"
+            _lower_leg = ""
+            motor_ = "foot_motor_"
+        else:
+            _hip = "_hip"
+            _upper_leg = "_upper_leg"
+            _lower_leg = "_lower_leg"
+            motor_ = "motor_"
+
         knee_friction_force = 0
         pi = math.pi
         leg_position = LEG_POSITION[leg_id]
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_hip"],
+            self._joint_name_to_id["motor_" + leg_position + _hip],
             self.INIT_POSES[self._pose_id][3 * leg_id],
             targetVelocity=0)
 
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_upper_leg"],
+            self._joint_name_to_id["motor_" + leg_position + _upper_leg],
             self.INIT_POSES[self._pose_id][3 * leg_id + 1],
             targetVelocity=0)
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_lower_leg"],
+            self._joint_name_to_id[motor_ + leg_position + _lower_leg],
             self.INIT_POSES[self._pose_id][3 * leg_id + 2],
             targetVelocity=0)
 
