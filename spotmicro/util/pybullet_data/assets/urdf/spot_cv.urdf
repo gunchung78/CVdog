@@ -466,7 +466,7 @@
     <child
       link="front_left_hip" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
     <limit effort="1000" lower="-0.548" upper="0.548" velocity="0.7"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
@@ -521,8 +521,8 @@
     <child
       link="front_left_up_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-2.666" upper="1.548" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-1.548" upper="2.666" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link
@@ -576,25 +576,25 @@
     <child
       link="front_left_down_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-0.1" upper="2.59" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-2.59" upper="0.1" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <link
     name="front_left_foot_link">
     <inertial>
       <origin
-        xyz="0.0020085 -6.1592E-07 0.0024004"
+        xyz="4.3094E-06 5.1838E-07 0.0031299"
         rpy="0 0 0" />
       <mass
-        value="0.05" />
+        value="0.01" />
       <inertia
-        ixx="2.2652E-07"
-        ixy="-5.9915E-12"
-        ixz="1.1701E-07"
+        ixx="2.3062E-07"
+        ixy="-6.8799E-12"
+        ixz="1.219E-07"
         iyy="5.6089E-07"
-        iyz="3.311E-12"
-        izz="5.1534E-07" />
+        iyz="9.7522E-13"
+        izz="5.1124E-07" />
     </inertial>
     <visual>
       <origin
@@ -618,13 +618,14 @@
         <mesh
           filename="../Parts/front_left_foot_link.STL" />
       </geometry>
+      <contact_coefficients mu="10.1"/>
     </collision>
   </link>
   <joint
     name="front_left_leg_foot"
     type="fixed">
     <origin
-      xyz="-0.0052516 -0.0308 -0.12779"
+      xyz="-0.003621 -0.0308 -0.12839"
       rpy="0 0 0" />
     <parent
       link="front_left_down_leg" />
@@ -684,7 +685,7 @@
     <child
       link="front_right_hip" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
      <limit effort="1000" lower="-0.548" upper="0.548" velocity="0.7"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
@@ -739,8 +740,8 @@
     <child
       link="front_right_up_leg" />
     <axis
-      xyz="0 -1 0" />
-   <limit effort="1000" lower="-2.666" upper="1.548" velocity="0.5"/>
+      xyz="0 1 0" />
+   <limit effort="1000" lower="-1.548" upper="2.666" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link
@@ -794,18 +795,18 @@
     <child
       link="front_right_down_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-0.1" upper="2.59" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-2.59" upper="0.1" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <link
     name="front_right_foot_link">
     <inertial>
       <origin
-        xyz="0.0012979 -6.1592E-07 0.0026895"
+        xyz="0.0020085 -6.1592E-07 0.0024004"
         rpy="0 0 0" />
       <mass
-        value="0.05" />
+        value="0.01" />
       <inertia
         ixx="2.2652E-07"
         ixy="-5.9915E-12"
@@ -836,13 +837,14 @@
         <mesh
           filename="../Parts/front_right_foot_link.STL" />
       </geometry>
+      <contact_coefficients mu="10.1"/>
     </collision>
   </link>
   <joint
     name="front_right_leg_foot"
     type="fixed">
     <origin
-      xyz="-0.00454106015218625 0.0308 -0.128081029544538"
+      xyz="-0.0052516 0.0308 -0.12779"
       rpy="0 0 0" />
     <parent
       link="front_right_down_leg" />
@@ -902,7 +904,7 @@
     <child
       link="back_left_hip" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
     <limit effort="1000" lower="-0.548" upper="0.548" velocity="0.7"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
@@ -957,8 +959,8 @@
     <child
       link="back_left_up_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-2.666" upper="1.548" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-1.548" upper="2.666" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link
@@ -1012,25 +1014,25 @@
     <child
       link="back_left_down_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-0.1" upper="2.59" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-2.59" upper="0.1" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <link
     name="back_left_foot_link">
     <inertial>
       <origin
-        xyz="0.0020085 -6.1592E-07 0.0024004"
+        xyz="4.3129E-06 5.1945E-07 0.0031299"
         rpy="0 0 0" />
       <mass
-        value="0.05" />
+        value="0.01" />
       <inertia
-        ixx="2.2652E-07"
-        ixy="-5.9915E-12"
-        ixz="1.1701E-07"
+        ixx="2.3062E-07"
+        ixy="-6.9427E-12"
+        ixz="1.219E-07"
         iyy="5.6089E-07"
-        iyz="3.311E-12"
-        izz="5.1534E-07" />
+        iyz="9.7199E-13"
+        izz="5.1124E-07" />
     </inertial>
     <visual>
       <origin
@@ -1054,13 +1056,14 @@
         <mesh
           filename="../Parts/back_left_foot_link.STL" />
       </geometry>
+      <contact_coefficients mu="10.1"/>
     </collision>
   </link>
   <joint
     name="back_left_leg_foot"
     type="fixed">
     <origin
-      xyz="-0.00525163411775806 -0.0308000000000001 -0.127791974605836"
+      xyz="-0.003621 -0.0308 -0.12839"
       rpy="0 0 0" />
     <parent
       link="back_left_down_leg" />
@@ -1120,7 +1123,7 @@
     <child
       link="back_right_hip" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
     <limit effort="1000" lower="-0.548" upper="0.548" velocity="0.7"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
@@ -1175,8 +1178,8 @@
     <child
       link="back_right_up_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-2.666" upper="1.548" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-1.548" upper="2.666" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link
@@ -1230,18 +1233,18 @@
     <child
       link="back_right_down_leg" />
     <axis
-      xyz="0 -1 0" />
-    <limit effort="1000" lower="-0.1" upper="2.59" velocity="0.5"/>
+      xyz="0 1 0" />
+    <limit effort="1000" lower="-2.59" upper="0.1" velocity="0.5"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <link
     name="back_right_foot_link">
     <inertial>
       <origin
-        xyz="0.0020069 -6.1592E-07 0.0024011"
+        xyz="0.0020085 -6.1592E-07 0.0024004"
         rpy="0 0 0" />
       <mass
-        value="0.05" />
+        value="0.01" />
       <inertia
         ixx="2.2652E-07"
         ixy="-5.9915E-12"
@@ -1272,13 +1275,14 @@
         <mesh
           filename="../Parts/back_right_foot_link.STL" />
       </geometry>
+      <contact_coefficients mu="10.1"/>
     </collision>
   </link>
   <joint
     name="back_right_leg_foot"
     type="fixed">
     <origin
-      xyz="-0.00525006243581849 0.0308 -0.12779266855331"
+      xyz="-0.0052516 0.0308 -0.12779"
       rpy="0 0 0" />
     <parent
       link="back_right_down_leg" />
